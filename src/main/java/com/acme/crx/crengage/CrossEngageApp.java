@@ -36,10 +36,27 @@ public class CrossEngageApp  {
 
         // execute jobs on threads pool
         ExecutorService pool = Executors.newWorkStealingPool();
-        List<BatchJob> result = executeOnPool(jobs, pool);
+        //List<BatchJob> result = executeOnPool(jobs, pool);
+        List<BatchJob> result = executeOnPool(jobs, pool, IService.getEmailServiceProvider());
+        
+        // or if configure SMS  send SMS
+        List<BatchJob> result2 = executeOnPool(jobs, pool, IService.getSmsServiceProvider());
+        
         pool.awaitTermination(2, TimeUnit.SECONDS);
     }
 
+    public static List<BatchJob> executeOnPool(List<BatchJob> jobs, ExecutorService pool, IService service) {
+        jobs.forEach(job -> {
+            CompletableFuture.supplyAsync(() -> {
+                return job.executeWithService(service);
+            }, pool);
+        });
+        return jobs;
+    }
+    
+    /**
+     * Execute one the other
+     */
     public static List<BatchJob> executeOnPool(List<BatchJob> jobs, ExecutorService pool) {
         jobs.forEach(job -> {
             CompletableFuture.supplyAsync(() -> {
