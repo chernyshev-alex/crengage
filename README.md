@@ -1,4 +1,3 @@
-**Crossengage Coding Challenge:** 
 
 We would like you to solve the following coding challenge. Please do so while adhering to the **restrictions** given! 
 We expect that it takes you a couple of hours to complete the task. Then take at least 30 minutes and write down 
