@@ -1,0 +1,22 @@
+plugins {
+    id 'java'
+}
+
+apply plugin: 'application'
+
+mainClassName = 'com.acme.crx.crengage.CrossEngageApp'
+
+run {
+    args = ["somefilepath"]
+}
+
+repositories {
+    jcenter()
+}
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+dependencies {
+    testCompile "junit:junit:4.11"
+}
